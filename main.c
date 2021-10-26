@@ -14,10 +14,10 @@ typedef struct {
 #define CREATOR "Alexandre Clavel"
 #define RGB_COMPONENT_COLOR 255
 #define MAX_ITERATION 32
-#define X_MIN -2.1
-#define X_MAX 0.57
-#define Y_MIN -1.22
-#define Y_MAX 1.22
+#define X_MIN -2.01
+#define X_MAX 0.48
+#define Y_MIN -1.13
+#define Y_MAX 1.13
 
 void writePPM(const char *filename, PPMImage *img)
 {

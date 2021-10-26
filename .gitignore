@@ -54,3 +54,4 @@ dkms.conf
 # Project Specifics
 ./.idea
 *.ppm
+mandelbrot
