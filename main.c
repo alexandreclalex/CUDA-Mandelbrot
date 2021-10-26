@@ -85,11 +85,16 @@ int main(int argc, char* argv[]) {
         exit(1);
     }
 
+    PPMPixel* colors = (PPMPixel *)malloc(MAX_ITERATION * sizeof(PPMPixel));
+    for(int i = 0; i<MAX_ITERATION; i++){
+        colors[i] = get_color(i);
+    }
+
     clock_t start = clock();
     for(long i = 0; i < img.x * img.y; i++){
         double y0 = (double)(i / img.x)/img.y * (Y_MAX - Y_MIN) + Y_MIN;
         double x0 = (double)(i % img.x)/img.x * (X_MAX - X_MIN) + X_MIN;
-        img.data[i] = get_color(get_iterations(x0, y0));
+        img.data[i] = colors[get_iterations(x0, y0)];
     }
     clock_t end = clock();
     double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
