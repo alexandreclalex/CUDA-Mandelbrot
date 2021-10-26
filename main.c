@@ -70,10 +70,20 @@ int get_iterations(double x0, double y0){
 }
 
 int main(int argc, char* argv[]) {
+    if(argc != 2 || atoi(argv[1]) <= 0){
+        fprintf(stderr, "INVALID INPUT\nVALID INPUT IS A SINGLE POSITIVE INTEGER FOR THE IMAGE WIDTH\n");
+        exit(1);
+    }
     PPMImage img;
     img.x = atoi(argv[1]);
     img.y = (Y_MAX - Y_MIN)/(X_MAX - X_MIN) * img.x;
+
+
     img.data = (PPMPixel *)malloc(img.x * img.y * sizeof(PPMPixel));
+    if(!img.data){
+        fprintf(stderr, "FAILED TO ALLOCATE %ld BYTES\n", img.x * img.y * sizeof(PPMPixel));
+        exit(1);
+    }
 
     clock_t start = clock();
     for(long i = 0; i < img.x * img.y; i++){
