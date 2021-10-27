@@ -101,4 +101,5 @@ int main(int argc, char* argv[]) {
     printf("Generated %ld by %ld Mandelbrot set in %f seconds.\n", img.x, img.y, time_spent);
     writePPM("./out.ppm", &img);
     free(img.data);
+    free(colors);
 }
