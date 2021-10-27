@@ -47,13 +47,37 @@ void writePPM(const char *filename, PPMImage *img)
     fclose(fp);
 }
 
-PPMPixel get_color(int iteration){
-    double percent = 1 - ((double) iteration / MAX_ITERATION);
-    PPMPixel result;
-    result.red = RGB_COMPONENT_COLOR * percent;
-    result.blue = RGB_COMPONENT_COLOR * percent;
-    result.green = RGB_COMPONENT_COLOR * percent;
-    return result;
+double lerp(double v0, double v1, double t){
+    return (1 - t) * v0 + t * v1;
+}
+
+PPMPixel lerp_ppm(PPMPixel a, PPMPixel b, double t){
+    PPMPixel out;
+    out.red = lerp(a.red, b.red, t);
+    out.green = lerp(a.green, b.green, t);
+    out.blue = lerp(a.blue, b.blue, t);
+    return out;
+}
+
+PPMPixel get_color(double proportion){
+    if(proportion == 0){
+        PPMPixel result = {0,0,0};
+        return result;
+    }
+
+    PPMPixel point0 = {255,255,255};
+    PPMPixel point1 = {128,0,0};
+    PPMPixel point2 = {120, 81, 169};
+    PPMPixel point3 = {0, 0, 128};
+
+    PPMPixel a0 = lerp_ppm(point0, point1, proportion);
+    PPMPixel a1 = lerp_ppm(point1, point2, proportion);
+    PPMPixel a2 = lerp_ppm(point3, point3, proportion);
+
+    PPMPixel b0 = lerp_ppm(a0, a1, proportion);
+    PPMPixel b1 = lerp_ppm(a1, a2, proportion);
+
+    return lerp_ppm(b0, b1, proportion);
 }
 
 int get_iterations(double x0, double y0){
@@ -87,7 +111,7 @@ int main(int argc, char* argv[]) {
 
     PPMPixel* colors = (PPMPixel *)malloc(MAX_ITERATION * sizeof(PPMPixel));
     for(int i = 0; i<MAX_ITERATION; i++){
-        colors[i] = get_color(i);
+        colors[i] = get_color((MAX_ITERATION - (double) i)/MAX_ITERATION);
     }
 
     clock_t start = clock();
