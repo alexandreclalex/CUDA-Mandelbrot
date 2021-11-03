@@ -56,3 +56,5 @@ dkms.conf
 *.ppm
 mandelbrot
 colors_test
+*cmake-build*
+
