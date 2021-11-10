@@ -3,7 +3,7 @@ project(Final CUDA)
 
 set(CMAKE_CUDA_STANDARD 14)
 
-add_executable(Final main.cu PPM.cu PPM.cuh impls/CpuMandelbrotImpl.cu ColorImpl.cu impls/GpuMandelbrotImpl.cu)
+add_executable(Final main.cu PPM.cu ColorImpl.cu impls/CpuMandelbrotImpl.cu impls/GpuMandelbrotImpl.cu)
 
 if (${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.18")
     if (NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
