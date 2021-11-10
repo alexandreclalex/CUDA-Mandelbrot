@@ -54,26 +54,26 @@ PPMPixel lerp_ppm(PPMPixel a, PPMPixel b, double t) {
     return out;
 }
 
-PPMPixel get_color(double proportion) {
-    if (proportion == 0) {
-        PPMPixel result = {0, 0, 0};
-        return result;
-    }
-
-    PPMPixel point0 = {255, 255, 255};
-    PPMPixel point1 = {128, 0, 0};
-    PPMPixel point2 = {120, 81, 169};
-    PPMPixel point3 = {0, 0, 128};
-
-    PPMPixel a0 = lerp_ppm(point0, point1, proportion);
-    PPMPixel a1 = lerp_ppm(point1, point2, proportion);
-    PPMPixel a2 = lerp_ppm(point3, point3, proportion);
-
-    PPMPixel b0 = lerp_ppm(a0, a1, proportion);
-    PPMPixel b1 = lerp_ppm(a1, a2, proportion);
-
-    return lerp_ppm(b0, b1, proportion);
-}
+//PPMPixel get_color(double proportion) {
+//    if (proportion == 0) {
+//        PPMPixel result = {0, 0, 0};
+//        return result;
+//    }
+//
+//    PPMPixel point0 = {255, 255, 255};
+//    PPMPixel point1 = {128, 0, 0};
+//    PPMPixel point2 = {120, 81, 169};
+//    PPMPixel point3 = {0, 0, 128};
+//
+//    PPMPixel a0 = lerp_ppm(point0, point1, proportion);
+//    PPMPixel a1 = lerp_ppm(point1, point2, proportion);
+//    PPMPixel a2 = lerp_ppm(point3, point3, proportion);
+//
+//    PPMPixel b0 = lerp_ppm(a0, a1, proportion);
+//    PPMPixel b1 = lerp_ppm(a1, a2, proportion);
+//
+//    return lerp_ppm(b0, b1, proportion);
+//}
 
 int main(int argc, char* argv[]) {
     PPMImage img;
